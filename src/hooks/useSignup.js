@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { projectAuth, projectFirestore } from '../firebase/config';
+import { useState } from 'react';
+import { projectAuth } from '../firebase/config';
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
