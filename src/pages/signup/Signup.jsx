@@ -14,7 +14,7 @@ function Signup() {
   };
   return (
     <form onSubmit={handleSubmit} className={styles['signup-form']}>
-      <h2>Signup</h2>
+      <h2>Sign up</h2>
       <label>
         <span>Display name:</span>
         <input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
