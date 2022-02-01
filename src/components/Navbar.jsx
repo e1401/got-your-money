@@ -4,6 +4,7 @@ import { useLogout } from '../hooks/useLogout';
 
 function Navbar() {
   const { logout } = useLogout();
+  console.log();
 
   return (
     <nav className={styles.navbar}>
