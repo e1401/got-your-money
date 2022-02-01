@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function Navbar() {
   const { logout } = useLogout();
-  console.log();
+  const { user } = useAuthContext();
+
+  console.log(user);
 
   return (
     <nav className={styles.navbar}>
@@ -12,13 +15,22 @@ function Navbar() {
         <li className={styles.title}>
           <Link to="/">Got your money</Link>
         </li>
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
-        <li>
-          <button className="btn" onClick={logout}>
-            Logout
-          </button>
-        </li>
+        {user && (
+          <>
+            <p>{user.displayName}</p>
+            <li>
+              <button className="btn" onClick={logout}>
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+        {!user && (
+          <>
+            <Link to="/login">Log in</Link>
+            <Link to="/signup">Sign up</Link>
+          </>
+        )}
       </ul>
     </nav>
   );
