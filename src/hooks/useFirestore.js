@@ -1,7 +1,7 @@
 //Purpose of this hook: add and remove documents from a Firestore collection
 
 import { useState, useEffect, useReducer } from 'react';
-import { projectFirestore } from '../firebase/config';
+import { projectFirestore, timestamp } from '../firebase/config';
 
 let initialState = {
   document: null,
@@ -44,7 +44,8 @@ export const useFirestore = (collection) => {
   const addDocument = async (doc) => {
     dispatch({ type: 'IS_PENDING' });
     try {
-      const addedDocument = await ref.add(doc);
+      const createdAt = timestamp.fromDate(new Date());
+      const addedDocument = await ref.add({ ...doc, createdAt });
       dispatchIfNotCanceled({ type: 'ADDED_DOCUMENT', payload: addedDocument });
     } catch (err) {
       dispatch({ type: 'ERROR', payload: err.message });
